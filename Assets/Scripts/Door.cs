@@ -5,9 +5,6 @@ using UnityEngine;
 
 public class Door : MonoBehaviour
 {
-    //A changer quand le player récupère la clé
-    public bool playerHasKey = false;
-    
     private Animator _animator;
 
     private void Start()
@@ -17,9 +14,12 @@ public class Door : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        if (other.CompareTag("Player") && playerHasKey)
+        Debug.Log("merdes");
+        if (other.CompareTag("Player") && other.gameObject.GetComponent<Player>().hasKey)
         {
             _animator.SetTrigger("Open");
+            other.gameObject.GetComponent<Player>().hasKey = false;
+            Destroy(this);  
         }
     }
 }
