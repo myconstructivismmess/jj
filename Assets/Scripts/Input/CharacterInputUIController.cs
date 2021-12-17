@@ -6,6 +6,9 @@ namespace Input
     {
         public GameObject keyboardAndMouseGameObject;
         public GameObject gamepadGameObject;
+        
+        public GameObject interactControlKeyboardAndMouseGameObject;
+        public GameObject interactControlGamepadGameObject;
 
         private void Update()
         {
@@ -16,10 +19,14 @@ namespace Input
                     case InputType.KeyboardAndMouse:
                         keyboardAndMouseGameObject.SetActive(true);
                         gamepadGameObject.SetActive(false);
+
+                        interactControlKeyboardAndMouseGameObject.SetActive(InteractionController.Instance is { canInteract: true });
                         break;
                     case InputType.Gamepad:
                         keyboardAndMouseGameObject.SetActive(false);
                         gamepadGameObject.SetActive(true);
+                        
+                        interactControlGamepadGameObject.SetActive(InteractionController.Instance is { canInteract: true });
                         break;
                 }
             }

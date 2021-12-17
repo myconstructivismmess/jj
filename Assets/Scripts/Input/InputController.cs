@@ -5,7 +5,7 @@ namespace Input
 {
     public class InputController : MonoBehaviour
     {
-        public static InputController Instance;
+        public static InputController Instance { get; private set; }
         
         
         private PlayerInput _playerInput;
@@ -13,6 +13,7 @@ namespace Input
         private void Awake()
         {
             Instance = this;
+            
             _playerInput = GetComponent<PlayerInput>();
         }
 
@@ -44,10 +45,8 @@ namespace Input
     
         public void OnCharacterInteract(InputValue inputValue)
         {
-            if (inputValue.isPressed)
-            {
-                Debug.Log("Interact");
-            }
+            if (inputValue.isPressed && !ReferenceEquals(InteractionController.Instance, null))
+                InteractionController.Instance.Interact();
         }
 
         public bool isRunning { get; private set; }

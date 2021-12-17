@@ -6,6 +6,8 @@ namespace Input
 	[RequireComponent(typeof(CharacterController))]
 	public class MovementController : MonoBehaviour
 	{
+		public static MovementController Instance { get; private set; }
+		
 		[Header("Translation")]
 		public float walkSpeed = 8f;
 		public float runSpeed = 15f;
@@ -22,6 +24,8 @@ namespace Input
 
 		private void Awake()
 		{
+			Instance = this;
+			
 			_characterController = GetComponent<CharacterController>();
 			_transform = transform;
 		}
@@ -52,6 +56,17 @@ namespace Input
 			}
 
 			cameraHolder.localRotation = Quaternion.Euler(new Vector3(_cameraRotationX, 0, 0));
+		}
+		
+		public Ray GetViewRay()
+		{
+			Vector3 direction = Quaternion.Euler(
+				_cameraRotationX + 90,
+				_transform.localRotation.eulerAngles.y,
+				0
+			) * Vector3.back;
+			
+			return new Ray(cameraHolder.position, direction);
 		}
 	}
 }
