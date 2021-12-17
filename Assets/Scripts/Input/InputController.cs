@@ -31,11 +31,7 @@ namespace Input
     
         public Vector2 cameraRotateInputValue { get; private set; } = Vector2.zero;
         public InputType inputType { get; private set; } = InputType.KeyboardAndMouse;
-        public void OnCameraRotateMouse(InputValue inputValue)
-        {
-            cameraRotateInputValue = inputValue.Get<Vector2>();
-        }
-        public void OnCameraRotateGamepad(InputValue inputValue)
+        public void OnRotateCamera(InputValue inputValue)
         {
             cameraRotateInputValue = inputValue.Get<Vector2>();
         }
