@@ -14,7 +14,6 @@ public class Door : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        Debug.Log("merdes");
         if (other.CompareTag("Player") && other.gameObject.GetComponent<Player>().hasKey)
         {
             _animator.SetTrigger("Open");
